@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RaptorModelStoreContainer" CdmEntityContainer="RaptorEntities">
+    <EntitySetMapping Name="ARecords">
+      <EntityTypeMapping TypeName="RaptorModel.ARecord">
+        <MappingFragment StoreEntitySet="ARecords">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UrlId" ColumnName="UrlId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CRecords">
+      <EntityTypeMapping TypeName="RaptorModel.CRecord">
+        <MappingFragment StoreEntitySet="CRecords">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UrlId" ColumnName="UrlId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnlineHistories">
+      <EntityTypeMapping TypeName="RaptorModel.OnlineHistory">
+        <MappingFragment StoreEntitySet="OnlineHistory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="OnlineAt" ColumnName="OnlineAt" />
+          <ScalarProperty Name="OfflineAt" ColumnName="OfflineAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RankHistories">
+      <EntityTypeMapping TypeName="RaptorModel.RankHistory">
+        <MappingFragment StoreEntitySet="RankHistories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RankId" ColumnName="RankId" />
+          <ScalarProperty Name="ObtainedOn" ColumnName="ObtainedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ranks">
+      <EntityTypeMapping TypeName="RaptorModel.Rank">
+        <MappingFragment StoreEntitySet="Ranks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Rank1" ColumnName="Rank" />
+          <ScalarProperty Name="RankPointsRequirement" ColumnName="RankPointsRequirement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RRecords">
+      <EntityTypeMapping TypeName="RaptorModel.RRecord">
+        <MappingFragment StoreEntitySet="RRecords">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UrlId" ColumnName="UrlId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Statuses">
+      <EntityTypeMapping TypeName="RaptorModel.Status">
+        <MappingFragment StoreEntitySet="Statuses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status1" ColumnName="Status" />
+          <ScalarProperty Name="StatusValue" ColumnName="StatusValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="RaptorModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Urls">
+      <EntityTypeMapping TypeName="RaptorModel.Url">
+        <MappingFragment StoreEntitySet="Urls">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="URLPath" ColumnName="URLPath" />
+          <ScalarProperty Name="URLHash" ColumnName="URLHash" />
+          <ScalarProperty Name="Processed" ColumnName="Processed" />
+          <ScalarProperty Name="ProcessedById" ColumnName="ProcessedById" />
+          <ScalarProperty Name="FoundById" ColumnName="FoundById" />
+          <ScalarProperty Name="FoundOn" ColumnName="FoundOn" />
+          <ScalarProperty Name="ProcessedOn" ColumnName="ProcessedOn" />
+          <ScalarProperty Name="IsContentObject" ColumnName="IsContentObject" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="RaptorModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+          <ScalarProperty Name="UserCountry" ColumnName="UserCountry" />
+          <ScalarProperty Name="UserLanguage" ColumnName="UserLanguage" />
+          <ScalarProperty Name="UserIsAdult" ColumnName="UserIsAdult" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserLicenseNumber" ColumnName="UserLicenseNumber" />
+          <ScalarProperty Name="UserStatusId" ColumnName="UserStatusId" />
+          <ScalarProperty Name="UserRankId" ColumnName="UserRankId" />
+          <ScalarProperty Name="UserRankHistoryId" ColumnName="UserRankHistoryId" />
+          <ScalarProperty Name="UserJoinedDate" ColumnName="UserJoinedDate" />
+          <ScalarProperty Name="UserWorkRecordId" ColumnName="UserWorkRecordId" />
+          <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkRecords">
+      <EntityTypeMapping TypeName="RaptorModel.WorkRecord">
+        <MappingFragment StoreEntitySet="WorkRecords">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

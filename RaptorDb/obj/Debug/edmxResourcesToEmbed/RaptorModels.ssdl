@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RaptorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ARecords">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrlId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CRecords">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrlId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OnlineHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="OnlineAt" Type="datetime" Nullable="false" />
+    <Property Name="OfflineAt" Type="datetime" />
+    <Property Name="SessionTime" Type="int" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="ProcessedBy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrlId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RankHistories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="RankId" Type="int" Nullable="false" />
+    <Property Name="ObtainedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ranks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rank" Type="nchar" MaxLength="60" Nullable="false" />
+    <Property Name="RankPointsRequirement" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RRecords">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrlId" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Statuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="StatusValue" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Urls">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="URLPath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="URLHash" Type="nchar" MaxLength="128" Nullable="false" />
+    <Property Name="Processed" Type="bit" Nullable="false" />
+    <Property Name="FoundById" Type="bigint" Nullable="false" />
+    <Property Name="FoundOn" Type="datetime" Nullable="false" />
+    <Property Name="ProcessedOn" Type="datetime" />
+    <Property Name="IsContentObject" Type="bit" Nullable="false" />
+    <Property Name="ResponseCode" Type="float" Nullable="false" />
+    <Property Name="ProcessedById" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserFullName" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserCountry" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserLanguage" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserIsAdult" Type="bit" Nullable="false" />
+    <Property Name="UserEmail" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserPassword" Type="nchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserLicenseNumber" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="UserStatusId" Type="int" Nullable="false" />
+    <Property Name="UserRankId" Type="int" Nullable="false" />
+    <Property Name="UserRankHistoryId" Type="bigint" Nullable="false" />
+    <Property Name="UserJoinedDate" Type="datetime" Nullable="false" />
+    <Property Name="UserWorkRecordId" Type="bigint" />
+    <Property Name="IsOnline" Type="bit" Nullable="false" />
+    <Property Name="TotalRunTime" Type="float" />
+  </EntityType>
+  <EntityType Name="WorkRecords">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Points" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ARecords_Urls">
+    <End Role="Urls" Type="Self.Urls" Multiplicity="1" />
+    <End Role="ARecords" Type="Self.ARecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urls">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ARecords">
+        <PropertyRef Name="UrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ARecords_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ARecords" Type="Self.ARecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ARecords">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CRecords_Urls">
+    <End Role="Urls" Type="Self.Urls" Multiplicity="1" />
+    <End Role="CRecords" Type="Self.CRecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urls">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CRecords">
+        <PropertyRef Name="UrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CRecords_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="CRecords" Type="Self.CRecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CRecords">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OnlineHistory_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="OnlineHistory" Type="Self.OnlineHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OnlineHistory">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProcessedBy_Urls">
+    <End Role="Urls" Type="Self.Urls" Multiplicity="1" />
+    <End Role="ProcessedBy" Type="Self.ProcessedBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urls">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProcessedBy">
+        <PropertyRef Name="UrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProcessedBy_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ProcessedBy" Type="Self.ProcessedBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProcessedBy">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RankHistories_Ranks">
+    <End Role="Ranks" Type="Self.Ranks" Multiplicity="1" />
+    <End Role="RankHistories" Type="Self.RankHistories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ranks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RankHistories">
+        <PropertyRef Name="RankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RankHistories_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="RankHistories" Type="Self.RankHistories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RankHistories">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RRecords_Urls">
+    <End Role="Urls" Type="Self.Urls" Multiplicity="1" />
+    <End Role="RRecords" Type="Self.RRecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urls">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RRecords">
+        <PropertyRef Name="UrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RRecords_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="RRecords" Type="Self.RRecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RRecords">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urls_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Urls" Type="Self.Urls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Urls">
+        <PropertyRef Name="FoundById" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Ranks">
+    <End Role="Ranks" Type="Self.Ranks" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ranks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UserRankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Statuses1">
+    <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UserStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkRecords_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="WorkRecords" Type="Self.WorkRecords" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkRecords">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RaptorModelStoreContainer">
+    <EntitySet Name="ARecords" EntityType="Self.ARecords" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CRecords" EntityType="Self.CRecords" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OnlineHistory" EntityType="Self.OnlineHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProcessedBy" EntityType="Self.ProcessedBy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RankHistories" EntityType="Self.RankHistories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ranks" EntityType="Self.Ranks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RRecords" EntityType="Self.RRecords" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urls" EntityType="Self.Urls" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkRecords" EntityType="Self.WorkRecords" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ARecords_Urls" Association="Self.FK_ARecords_Urls">
+      <End Role="Urls" EntitySet="Urls" />
+      <End Role="ARecords" EntitySet="ARecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ARecords_Users" Association="Self.FK_ARecords_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ARecords" EntitySet="ARecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CRecords_Urls" Association="Self.FK_CRecords_Urls">
+      <End Role="Urls" EntitySet="Urls" />
+      <End Role="CRecords" EntitySet="CRecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CRecords_Users" Association="Self.FK_CRecords_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CRecords" EntitySet="CRecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OnlineHistory_Users" Association="Self.FK_OnlineHistory_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="OnlineHistory" EntitySet="OnlineHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProcessedBy_Urls" Association="Self.FK_ProcessedBy_Urls">
+      <End Role="Urls" EntitySet="Urls" />
+      <End Role="ProcessedBy" EntitySet="ProcessedBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProcessedBy_Users" Association="Self.FK_ProcessedBy_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ProcessedBy" EntitySet="ProcessedBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RankHistories_Ranks" Association="Self.FK_RankHistories_Ranks">
+      <End Role="Ranks" EntitySet="Ranks" />
+      <End Role="RankHistories" EntitySet="RankHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RankHistories_Users" Association="Self.FK_RankHistories_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RankHistories" EntitySet="RankHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RRecords_Urls" Association="Self.FK_RRecords_Urls">
+      <End Role="Urls" EntitySet="Urls" />
+      <End Role="RRecords" EntitySet="RRecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RRecords_Users" Association="Self.FK_RRecords_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RRecords" EntitySet="RRecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urls_Users1" Association="Self.FK_Urls_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Urls" EntitySet="Urls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Ranks" Association="Self.FK_Users_Ranks">
+      <End Role="Ranks" EntitySet="Ranks" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Statuses1" Association="Self.FK_Users_Statuses1">
+      <End Role="Statuses" EntitySet="Statuses" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkRecords_Users" Association="Self.FK_WorkRecords_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="WorkRecords" EntitySet="WorkRecords" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

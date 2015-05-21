@@ -1,0 +1,14 @@
+c:\users\dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\RaptorServiceHost.exe.config
+c:\users\dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\RaptorServiceHost.exe
+c:\users\dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\RaptorServiceHost.pdb
+c:\users\dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\obj\Debug\RaptorServiceHost.csprojResolveAssemblyReference.cache
+c:\users\dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\obj\Debug\RaptorServiceHost.exe
+c:\users\dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\obj\Debug\RaptorServiceHost.pdb
+c:\users\dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\RaptorService.dll
+c:\users\dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\RaptorService.pdb
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\EntityFramework.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\EntityFramework.xml
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\RaptorDb.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorServiceHost\bin\Debug\RaptorDb.pdb

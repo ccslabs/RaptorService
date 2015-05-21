@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaptorService", "RaptorService\RaptorService.csproj", "{BE642D5A-D345-4B4C-8C60-A915C33DA4A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaptorServiceHost", "RaptorServiceHost\RaptorServiceHost.csproj", "{F5DD740C-1E41-43FD-A556-7531BC482402}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaptorDb", "RaptorDb\RaptorDb.csproj", "{40335FBD-07C6-47BC-89A3-CB2BC41F9759}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE642D5A-D345-4B4C-8C60-A915C33DA4A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE642D5A-D345-4B4C-8C60-A915C33DA4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE642D5A-D345-4B4C-8C60-A915C33DA4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE642D5A-D345-4B4C-8C60-A915C33DA4A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DD740C-1E41-43FD-A556-7531BC482402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DD740C-1E41-43FD-A556-7531BC482402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DD740C-1E41-43FD-A556-7531BC482402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DD740C-1E41-43FD-A556-7531BC482402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40335FBD-07C6-47BC-89A3-CB2BC41F9759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40335FBD-07C6-47BC-89A3-CB2BC41F9759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40335FBD-07C6-47BC-89A3-CB2BC41F9759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40335FBD-07C6-47BC-89A3-CB2BC41F9759}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

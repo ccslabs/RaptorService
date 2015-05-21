@@ -1,0 +1,10 @@
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\RaptorDb.dll.config
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\RaptorDb.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\RaptorDb.pdb
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\EntityFramework.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\EntityFramework.xml
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\obj\Debug\RaptorDb.csprojResolveAssemblyReference.cache
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\obj\Debug\RaptorDb.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\obj\Debug\RaptorDb.pdb
