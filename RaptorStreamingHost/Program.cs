@@ -32,6 +32,20 @@ namespace RaptorStreamingHost
     {
         RaptorDb.Methods RAPI = new RaptorDb.Methods();
 
+        #region Operation Contracts
+
+        [OperationContract]
+        public void SendFaces(Stream data)
+        {
+            Console.WriteLine("Client Sending Faces");
+            var memoryStream = new MemoryStream();
+            using (data)
+                CopyStream(data, memoryStream);
+            byte[] alBytes = memoryStream.ToArray();
+            data.Close();
+            Face.Face fac = DeserializeFaceFromStream(alBytes);
+        }
+
         [OperationContract]
         public void SendContentObject(Stream data)
         {
@@ -51,24 +65,24 @@ namespace RaptorStreamingHost
         }
 
         [OperationContract]
-        public void SendFaces(Stream data)
+        public Stream GetContentObject()
         {
-            Console.WriteLine("Client Sending Faces");
-            var memoryStream = new MemoryStream();
-            using (data)
-                CopyStream(data, memoryStream);
-            byte[] alBytes = memoryStream.ToArray();
-            data.Close();
-            Face.Face fac = DeserializeFaceFromStream(alBytes);
+            Stream stream = null;
+            stream = SerializeObjectToStream(RAPI.GetContentObject());
+            stream.Position = 0L;
+            return stream;
         }
+        #endregion
 
-        public static Face.Face DeserializeFaceFromStream(byte[] allBytes)
+        #region Deserialization
+
+        private static Face.Face DeserializeFaceFromStream(byte[] allBytes)
         {
             using (var stream = new MemoryStream(allBytes))
                 return (Face.Face)DeserializeFaceFromStream(stream);
         }
 
-        public static Face.Face DeserializeFaceFromStream(MemoryStream stream)
+        private static Face.Face DeserializeFaceFromStream(MemoryStream stream)
         {
             IFormatter formatter = new BinaryFormatter();
             stream.Seek(0, SeekOrigin.Begin);
@@ -76,7 +90,37 @@ namespace RaptorStreamingHost
             return objectType;
         }
 
-        public static void CopyStream(Stream input, Stream output)
+        private static ContentObjectData DeserializeContentObjectFromStream(byte[] allBytes)
+        {
+            using (var stream = new MemoryStream(allBytes))
+                return (ContentObjectData)DeserializeContentObjectFromStream(stream);
+        }
+
+        private static ContentObjectData DeserializeContentObjectFromStream(MemoryStream stream)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            stream.Seek(0, SeekOrigin.Begin);
+            ContentObjectData objectType = (ContentObjectData)formatter.Deserialize(stream);
+            return objectType;
+        }
+
+        #endregion
+
+        #region Serialization
+
+        private static Stream SerializeObjectToStream(object objectType)
+        {
+            MemoryStream stream = new MemoryStream();
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, objectType);
+            stream.Position = 0L; // REMEMBER to reset stream or WCF will just send the stream from the end resulting in an empty stream!
+            return (Stream)stream;
+        }
+        #endregion
+
+        #region Stream Management
+
+        private static void CopyStream(Stream input, Stream output)
         {
             byte[] buffer = new byte[32768];
             int read;
@@ -86,38 +130,9 @@ namespace RaptorStreamingHost
             }
         }
 
-        public static ContentObjectData DeserializeContentObjectFromStream(byte[] allBytes)
-        {
-            using (var stream = new MemoryStream(allBytes))
-                return (ContentObjectData)DeserializeContentObjectFromStream(stream);
-        }
+        #endregion
+
         
-        public static ContentObjectData DeserializeContentObjectFromStream(MemoryStream stream)
-        {
-            IFormatter formatter = new BinaryFormatter();
-            stream.Seek(0, SeekOrigin.Begin);
-            ContentObjectData objectType = (ContentObjectData)formatter.Deserialize(stream);
-            return objectType;
-        }
-
-        public static Stream SerializeToStream(object objectType)
-        {
-            MemoryStream stream = new MemoryStream();
-            IFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, objectType);
-            stream.Position = 0L; // REMEMBER to reset stream or WCF will just send the stream from the end resulting in an empty stream!
-            return (Stream)stream;
-        }
-
-        [OperationContract]
-        public Stream GetContentObject()
-        {
-            Stream stream = null;
-            stream = SerializeToStream(RAPI.GetContentObject());
-            stream.Position = 0L;
-            return stream;
-        }
-
     }
 
 
