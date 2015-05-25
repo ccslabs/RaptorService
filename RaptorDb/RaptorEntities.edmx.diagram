@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="936173305d804456a7d2280dd463ea73" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="RaptorModel.ARecord" Width="1.5" PointX="10.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.ContentObject" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.COSource" Width="1.5" PointX="10.5" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.CRecord" Width="1.5" PointX="10.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.Face" Width="1.5" PointX="10.5" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.OnlineHistory" Width="1.5" PointX="8.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.ProcessedBy" Width="1.5" PointX="10.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.RankHistory" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.Rank" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.RRecord" Width="1.5" PointX="13.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.Status" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.Url" Width="1.5" PointX="8.25" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.User" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaptorModel.WorkRecord" Width="1.5" PointX="8.25" PointY="27.625" IsExpanded="true" />
+        <AssociationConnector Association="RaptorModel.FK_ARecords_Urls" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_ARecords_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_COSources_ContentObjects" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_Faces_ContentObjects" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_COSources_Urls" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_CRecords_Urls" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_CRecords_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_OnlineHistory_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_ProcessedBy_Urls" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_ProcessedBy_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_RankHistories_Ranks" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_RankHistories_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_Users_Ranks" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_RRecords_Urls" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_RRecords_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_Users_Statuses1" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_Urls_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="RaptorModel.FK_WorkRecords_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

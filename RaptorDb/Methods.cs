@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContentObjects;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -11,21 +12,21 @@ namespace RaptorDb
 {
     public class Methods
     {
-        private static RaptorEntities1 raptorEntities;
+        private static RaptorEntities raptorEntities;
         public static User user; // Populated in ContinueLogin
 
         public Methods()
         {
             try
             {
-                raptorEntities = new RaptorEntities1();
+                raptorEntities = new RaptorEntities();
                 raptorEntities.Database.Connection.Open();
             }
             catch (Exception)
             {
                 // This is not good! But what to do about it?
                 // Usually a TimeOut
-                raptorEntities = new RaptorEntities1();
+                raptorEntities = new RaptorEntities();
                 raptorEntities.Database.Connection.Open();
             }
 
@@ -70,7 +71,7 @@ namespace RaptorDb
 
         public bool RegisterUser(string name, string country, string emailAddress, string passwordHash)
         {
-            using (var rapEn = new RaptorEntities1())
+            using (var rapEn = new RaptorEntities())
             {
                 rapEn.Database.Connection.Open();
                 User user = new User();
@@ -133,6 +134,7 @@ namespace RaptorDb
 
         public void LogUserOff()
         {
+
             try
             {
                 var u = raptorEntities.Users.First(us => us.Id == user.Id);
@@ -172,36 +174,36 @@ namespace RaptorDb
 
         }
 
-        RaptorEntities1 threadedRERaptorEntities = new RaptorEntities1();
+
         public void ReciveErrorUrl(string currentUrl, int ErrorCode)
         {
-            threadedRERaptorEntities = new RaptorEntities1();
-            threadedRERaptorEntities.Database.Connection.Open();
+            raptorEntities = new RaptorEntities();
+            raptorEntities.Database.Connection.Open();
             UrlProcessedBy(currentUrl);
 
-            var getCurrentUrl = threadedRERaptorEntities.Urls.First(u => u.URLPath == currentUrl);
+            var getCurrentUrl = raptorEntities.Urls.First(u => u.URLPath == currentUrl);
             getCurrentUrl.ResponseCode = ErrorCode;
             getCurrentUrl.IsContentObject = false;
             getCurrentUrl.Processed = true;
             getCurrentUrl.ProcessedById = user.Id;
             getCurrentUrl.ProcessedOn = DateTime.Now;
-            threadedRERaptorEntities.SaveChanges();
-            threadedRERaptorEntities.Database.Connection.Close();
+            raptorEntities.SaveChanges();
+            raptorEntities.Database.Connection.Close();
 
         }
-        RaptorEntities1 threadedUPBEntities = new RaptorEntities1();
+
 
         private void UrlProcessedBy(string currentUrl)
         {
-            threadedUPBEntities = new RaptorEntities1();
+            raptorEntities = new RaptorEntities();
             Url OriginalUrlId = null;
             ProcessedBy DuplicateEntry = null;
-            threadedUPBEntities.Database.Connection.Open();
+            raptorEntities.Database.Connection.Open();
             try
             {
-                OriginalUrlId = threadedUPBEntities.Urls.First(u => u.URLPath == currentUrl);                   // Get the Id of the Current URL
+                OriginalUrlId = raptorEntities.Urls.First(u => u.URLPath == currentUrl);                   // Get the Id of the Current URL
                 // If this has already been added then we will get a result which we can ignore - or it will throw an exception which we catch and process as a new record.
-                DuplicateEntry = threadedUPBEntities.ProcessedBies.First(p => p.UrlId == OriginalUrlId.Id && p.UserId == user.Id);
+                DuplicateEntry = raptorEntities.ProcessedBies.First(p => p.UrlId == OriginalUrlId.Id && p.UserId == user.Id);
             }
             catch (Exception)
             {
@@ -211,16 +213,37 @@ namespace RaptorDb
                     DuplicateEntry = new ProcessedBy();
                     DuplicateEntry.UrlId = OriginalUrlId.Id;
                     DuplicateEntry.UserId = user.Id;
-                    threadedUPBEntities.ProcessedBies.Add(DuplicateEntry);
-                    threadedUPBEntities.SaveChanges();
+                    raptorEntities.ProcessedBies.Add(DuplicateEntry);
+                    raptorEntities.SaveChanges();
                 }
             }
             finally
             {
-                threadedUPBEntities.Database.Connection.Close();
+                raptorEntities.Database.Connection.Close();
             }
         }
 
+
+        public void AddContentObject(string hash, string fileName, string data, string displayImage)
+        {
+            raptorEntities = new RaptorEntities();
+            raptorEntities.Database.Connection.Open();
+            var cos = new ContentObject();
+            var sources = new COSource();
+            sources.UrlId = 0;
+            sources.COId = cos.Id;
+            cos.COData = data;
+            cos.CODisplayImage = displayImage;
+            cos.COHash = hash;
+            cos.COName = fileName;
+            raptorEntities.ContentObjects.Add(cos);
+
+
+            raptorEntities.SaveChanges();
+            raptorEntities.Database.Connection.Close();
+
+
+        }
 
         private int taskCounter = 0;
         public void ReceiveUrls(string url, string urlHash, string sourceUrl, bool isContentObject, float ErrorCode)
@@ -230,25 +253,20 @@ namespace RaptorDb
                 System.Threading.Thread.Sleep(250);
             }
 
-            taskCounter++;
-            Task tProcessUrls = new Task(() => ProcessReceivedUrlQueue(url, urlHash, sourceUrl, isContentObject, ErrorCode));
-            tProcessUrls.Start();
+            //taskCounter++;
+            //Task tProcessUrls = new Task(() => ProcessReceivedUrlQueue(url, urlHash, sourceUrl, isContentObject, ErrorCode));
+            //tProcessUrls.Start();
 
-            //UrlProcessedBy(sourceUrl);
-            //ProcessReceivedUrlQueue(url, urlHash, sourceUrl, isContentObject, ErrorCode);
+            UrlProcessedBy(sourceUrl);
+            ProcessReceivedUrlQueue(url, urlHash, sourceUrl, isContentObject, ErrorCode);
         }
 
-        RaptorEntities1 threadedRaptorEntities = new RaptorEntities1();
+        //  RaptorEntities1 threadedRaptorEntities = new RaptorEntities1();
 
         private void ProcessReceivedUrlQueue(string url, string urlHash, string sourceUrl, bool isContentObject, float ErrorCode)
         {
+            RaptorEntities threadedRaptorEntities = new RaptorEntities();
             threadedRaptorEntities.Database.Connection.Open();
-
-            while (threadedRaptorEntities.Database.Connection.State != System.Data.ConnectionState.Open)
-            {
-                System.Threading.Thread.Sleep(500);
-                threadedRaptorEntities.Database.Connection.Open();
-            }
 
             try
             {
@@ -272,6 +290,7 @@ namespace RaptorDb
 
                 taskCounter--;
                 threadedRaptorEntities.Database.Connection.Close();
+                threadedRaptorEntities = null;
             }
             catch (Exception ex)
             {
@@ -283,12 +302,14 @@ namespace RaptorDb
             }
             finally
             {
-                threadedRaptorEntities.Database.Connection.Close();
+                if (threadedRaptorEntities != null)
+                {
+                    threadedRaptorEntities.Database.Connection.Close();
+                    threadedRaptorEntities = null;
+                }
             }
 
         }// Method
-
-
 
         private string ReturnRedirectUrl(string Url, string urlSource)
         {
@@ -319,6 +340,7 @@ namespace RaptorDb
 
         public AgentDetails GetDetails()
         {
+            RaptorEntities threadedRaptorEntities = new RaptorEntities();
             AgentDetails ag = new AgentDetails();
 
             //TODO: Technically we should be getting these each time incase there has been a change in circumstance!
@@ -341,7 +363,6 @@ namespace RaptorDb
             use = null;
             return ag;
         }
-
 
         public string GetAgentRank()
         {
@@ -463,7 +484,63 @@ namespace RaptorDb
             raptorEntities.OnlineHistories.Add(oh);
         }
 
+        ///////////////////////////////////////////// STREAMING METHODS
 
+        public bool SaveContentObject(ContentObject co)
+        {
+            try
+            {                
+                raptorEntities.ContentObjects.Add(co);
+                raptorEntities.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool SaveFaces(Face fac)
+        {
+            try
+            {
+                raptorEntities.Faces.Add(fac);
+                raptorEntities.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public ContentObjectData GetContentObject()
+        {
+            try
+            {
+                ContentObjectData allRows = (ContentObjectData)raptorEntities.ContentObjects.First();
+
+                return allRows;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public ContentObjectData GetSpecificContentObject(int ContentNumber)
+        {
+            try
+            {
+                ContentObjectData allRows = (ContentObjectData)raptorEntities.ContentObjects.First();
+
+                return allRows;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 
     public class AgentDetails
@@ -483,8 +560,6 @@ namespace RaptorDb
         public double AgentsTotalURIsProcessed { get; set; }
     }
 
-
-
     public class ReceivedURLCollection
     {
         public string url { get; set; }
@@ -499,6 +574,5 @@ namespace RaptorDb
         public string CurrentUrl { get; set; }
         public int ErrorCode { get; set; }
     }
-
 
 }

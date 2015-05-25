@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ContentObjects">
+      <HintPath>..\RaptorContentObjectsSeeder\ContentObjects\bin\Debug\ContentObjects.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -52,83 +55,93 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ARecord.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentObject.cs">
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContentObjectsPartial.cs" />
+    <Compile Include="COSource.cs">
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CRecord.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Face.cs">
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Methods.cs" />
     <Compile Include="OnlineHistory.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ProcessedBy.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rank.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="RankHistory.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="RaptorModels.Context.cs">
+    <Compile Include="RaptorEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RaptorModels.Context.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="RaptorModels.cs">
+    <Compile Include="RaptorEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="RaptorModels.Designer.cs">
+    <Compile Include="RaptorEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RaptorModels.edmx</DependentUpon>
+      <DependentUpon>RaptorEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="RRecord.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Status.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Url.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkRecord.cs">
-      <DependentUpon>RaptorModels.tt</DependentUpon>
+      <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="RaptorModels.edmx">
+    <EntityDeploy Include="RaptorEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RaptorModels.Designer.cs</LastGenOutput>
+      <LastGenOutput>RaptorEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="RaptorModels.edmx.diagram">
-      <DependentUpon>RaptorModels.edmx</DependentUpon>
+    <None Include="RaptorEntities.edmx.diagram">
+      <DependentUpon>RaptorEntities.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RaptorModels.Context.tt">
+    <Content Include="RaptorEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RaptorModels.edmx</DependentUpon>
-      <LastGenOutput>RaptorModels.Context.cs</LastGenOutput>
+      <DependentUpon>RaptorEntities.edmx</DependentUpon>
+      <LastGenOutput>RaptorEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="RaptorModels.tt">
+    <Content Include="RaptorEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RaptorModels.edmx</DependentUpon>
-      <LastGenOutput>RaptorModels.cs</LastGenOutput>
+      <DependentUpon>RaptorEntities.edmx</DependentUpon>
+      <LastGenOutput>RaptorEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,6 +8,24 @@
     <Property Name="UrlId" Type="bigint" Nullable="false" />
     <Property Name="UserId" Type="bigint" Nullable="false" />
   </EntityType>
+  <EntityType Name="ContentObjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="COHash" Type="nchar" MaxLength="128" Nullable="false" />
+    <Property Name="COData" Type="varchar(max)" Nullable="false" />
+    <Property Name="COName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CODisplayImage" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="COSources">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="COId" Type="bigint" Nullable="false" />
+    <Property Name="UrlId" Type="bigint" />
+  </EntityType>
   <EntityType Name="CRecords">
     <Key>
       <PropertyRef Name="Id" />
@@ -15,6 +33,14 @@
     <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UrlId" Type="bigint" Nullable="false" />
     <Property Name="UserId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Faces">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="COFace" Type="varchar(max)" Nullable="false" />
+    <Property Name="COId" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="OnlineHistory">
     <Key>
@@ -144,6 +170,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_COSources_ContentObjects">
+    <End Role="ContentObjects" Type="Self.ContentObjects" Multiplicity="1" />
+    <End Role="COSources" Type="Self.COSources" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentObjects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="COSources">
+        <PropertyRef Name="COId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COSources_Urls">
+    <End Role="Urls" Type="Self.Urls" Multiplicity="0..1" />
+    <End Role="COSources" Type="Self.COSources" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urls">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="COSources">
+        <PropertyRef Name="UrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CRecords_Urls">
     <End Role="Urls" Type="Self.Urls" Multiplicity="1" />
     <End Role="CRecords" Type="Self.CRecords" Multiplicity="*" />
@@ -165,6 +215,18 @@
       </Principal>
       <Dependent Role="CRecords">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faces_ContentObjects">
+    <End Role="ContentObjects" Type="Self.ContentObjects" Multiplicity="1" />
+    <End Role="Faces" Type="Self.Faces" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentObjects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Faces">
+        <PropertyRef Name="COId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -302,7 +364,10 @@
   </Association>
   <EntityContainer Name="RaptorModelStoreContainer">
     <EntitySet Name="ARecords" EntityType="Self.ARecords" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContentObjects" EntityType="Self.ContentObjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="COSources" EntityType="Self.COSources" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CRecords" EntityType="Self.CRecords" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Faces" EntityType="Self.Faces" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OnlineHistory" EntityType="Self.OnlineHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProcessedBy" EntityType="Self.ProcessedBy" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RankHistories" EntityType="Self.RankHistories" Schema="dbo" store:Type="Tables" />
@@ -321,6 +386,14 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="ARecords" EntitySet="ARecords" />
     </AssociationSet>
+    <AssociationSet Name="FK_COSources_ContentObjects" Association="Self.FK_COSources_ContentObjects">
+      <End Role="ContentObjects" EntitySet="ContentObjects" />
+      <End Role="COSources" EntitySet="COSources" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COSources_Urls" Association="Self.FK_COSources_Urls">
+      <End Role="Urls" EntitySet="Urls" />
+      <End Role="COSources" EntitySet="COSources" />
+    </AssociationSet>
     <AssociationSet Name="FK_CRecords_Urls" Association="Self.FK_CRecords_Urls">
       <End Role="Urls" EntitySet="Urls" />
       <End Role="CRecords" EntitySet="CRecords" />
@@ -328,6 +401,10 @@
     <AssociationSet Name="FK_CRecords_Users" Association="Self.FK_CRecords_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="CRecords" EntitySet="CRecords" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faces_ContentObjects" Association="Self.FK_Faces_ContentObjects">
+      <End Role="ContentObjects" EntitySet="ContentObjects" />
+      <End Role="Faces" EntitySet="Faces" />
     </AssociationSet>
     <AssociationSet Name="FK_OnlineHistory_Users" Association="Self.FK_OnlineHistory_Users">
       <End Role="Users" EntitySet="Users" />

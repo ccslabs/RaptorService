@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using RaptorDb;
+using System.IO;
 
 namespace RaptorService
 {
@@ -25,25 +26,25 @@ namespace RaptorService
         [OperationContract(IsInitiating = false, IsTerminating = false)]
         bool DeleteUser();
 
-        [OperationContract(IsInitiating = true, IsTerminating = false)]
+        [OperationContract(IsInitiating = false, IsTerminating = false)]
         AgentDetails GetDetails();
 
-        [OperationContract(IsInitiating = true, IsTerminating = false)]
+        [OperationContract(IsInitiating = false, IsTerminating = false)]
         ArrayList SendUrls();
 
-        [OperationContract(IsOneWay = true, IsInitiating = true, IsTerminating = false)]
+        [OperationContract(IsOneWay = true, IsInitiating = false, IsTerminating = false)]
         void SendError(UrlError uE);
 
-        [OperationContract(IsOneWay = true, IsInitiating = true)]
+        [OperationContract(IsOneWay = true, IsInitiating = false)]
         void ReceiveUrls(string url, string urlHash, string sourceUrl, bool IsContentObject, float ErrorCode);
 
-        [OperationContract(IsInitiating = true)]
+        [OperationContract(IsInitiating = false)]
         bool RegisterUser(string name, string country, string emailAddress, string passwordHash);
 
-        [OperationContract(IsInitiating = true, IsTerminating = true)]
+        [OperationContract(IsInitiating = false, IsTerminating = true)]
         bool CheckEmailAddressIsFree(string emailAddress);
 
-        
+       
     }
 
     [DataContract]
@@ -87,6 +88,6 @@ namespace RaptorService
         }
     }
 
-
+   
 
 }

@@ -19,13 +19,12 @@ namespace RaptorDb
         {
             this.ARecords = new HashSet<ARecord>();
             this.CRecords = new HashSet<CRecord>();
+            this.OnlineHistories = new HashSet<OnlineHistory>();
+            this.ProcessedBies = new HashSet<ProcessedBy>();
             this.RankHistories = new HashSet<RankHistory>();
             this.RRecords = new HashSet<RRecord>();
             this.Urls = new HashSet<Url>();
-            this.Urls1 = new HashSet<Url>();
             this.WorkRecords = new HashSet<WorkRecord>();
-            this.ProcessedBies = new HashSet<ProcessedBy>();
-            this.OnlineHistories = new HashSet<OnlineHistory>();
         }
     
         public long Id { get; set; }
@@ -49,6 +48,10 @@ namespace RaptorDb
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRecord> CRecords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OnlineHistory> OnlineHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProcessedBy> ProcessedBies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RankHistory> RankHistories { get; set; }
         public virtual Rank Rank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -57,12 +60,6 @@ namespace RaptorDb
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Url> Urls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Url> Urls1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkRecord> WorkRecords { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProcessedBy> ProcessedBies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OnlineHistory> OnlineHistories { get; set; }
     }
 }

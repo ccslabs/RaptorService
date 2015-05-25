@@ -18,31 +18,33 @@ namespace RaptorDb
         public Url()
         {
             this.ARecords = new HashSet<ARecord>();
+            this.COSources = new HashSet<COSource>();
             this.CRecords = new HashSet<CRecord>();
-            this.RRecords = new HashSet<RRecord>();
             this.ProcessedBies = new HashSet<ProcessedBy>();
+            this.RRecords = new HashSet<RRecord>();
         }
     
         public long Id { get; set; }
         public string URLPath { get; set; }
         public string URLHash { get; set; }
         public bool Processed { get; set; }
-        public Nullable<long> ProcessedById { get; set; }
         public long FoundById { get; set; }
         public System.DateTime FoundOn { get; set; }
         public Nullable<System.DateTime> ProcessedOn { get; set; }
         public bool IsContentObject { get; set; }
         public double ResponseCode { get; set; }
+        public Nullable<long> ProcessedById { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ARecord> ARecords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<COSource> COSources { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CRecord> CRecords { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProcessedBy> ProcessedBies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RRecord> RRecords { get; set; }
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProcessedBy> ProcessedBies { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="RaptorModelStoreContainer" CdmEntityContainer="RaptorEntities1">
+  <EntityContainerMapping StorageEntityContainer="RaptorModelStoreContainer" CdmEntityContainer="RaptorEntities">
     <EntitySetMapping Name="ARecords">
       <EntityTypeMapping TypeName="RaptorModel.ARecord">
         <MappingFragment StoreEntitySet="ARecords">
@@ -10,9 +10,49 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ContentObjects">
+      <EntityTypeMapping TypeName="RaptorModel.ContentObject">
+        <MappingFragment StoreEntitySet="ContentObjects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="COHash" ColumnName="COHash" />
+          <ScalarProperty Name="COData" ColumnName="COData" />
+          <ScalarProperty Name="COName" ColumnName="COName" />
+          <ScalarProperty Name="CODisplayImage" ColumnName="CODisplayImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COSources">
+      <EntityTypeMapping TypeName="RaptorModel.COSource">
+        <MappingFragment StoreEntitySet="COSources">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="COId" ColumnName="COId" />
+          <ScalarProperty Name="UrlId" ColumnName="UrlId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CRecords">
       <EntityTypeMapping TypeName="RaptorModel.CRecord">
         <MappingFragment StoreEntitySet="CRecords">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UrlId" ColumnName="UrlId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnlineHistories">
+      <EntityTypeMapping TypeName="RaptorModel.OnlineHistory">
+        <MappingFragment StoreEntitySet="OnlineHistory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="OnlineAt" ColumnName="OnlineAt" />
+          <ScalarProperty Name="OfflineAt" ColumnName="OfflineAt" />
+          <ScalarProperty Name="SessionTime" ColumnName="SessionTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProcessedBies">
+      <EntityTypeMapping TypeName="RaptorModel.ProcessedBy">
+        <MappingFragment StoreEntitySet="ProcessedBy">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UrlId" ColumnName="UrlId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -70,23 +110,22 @@
     <EntitySetMapping Name="Urls">
       <EntityTypeMapping TypeName="RaptorModel.Url">
         <MappingFragment StoreEntitySet="Urls">
-          <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="URLPath" ColumnName="URLPath" />
           <ScalarProperty Name="URLHash" ColumnName="URLHash" />
           <ScalarProperty Name="Processed" ColumnName="Processed" />
-          <ScalarProperty Name="ProcessedById" ColumnName="ProcessedById" />
           <ScalarProperty Name="FoundById" ColumnName="FoundById" />
           <ScalarProperty Name="FoundOn" ColumnName="FoundOn" />
           <ScalarProperty Name="ProcessedOn" ColumnName="ProcessedOn" />
           <ScalarProperty Name="IsContentObject" ColumnName="IsContentObject" />
+          <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+          <ScalarProperty Name="ProcessedById" ColumnName="ProcessedById" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="RaptorModel.User">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="TotalRunTime" ColumnName="TotalRunTime" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
           <ScalarProperty Name="UserCountry" ColumnName="UserCountry" />
@@ -101,6 +140,7 @@
           <ScalarProperty Name="UserJoinedDate" ColumnName="UserJoinedDate" />
           <ScalarProperty Name="UserWorkRecordId" ColumnName="UserWorkRecordId" />
           <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+          <ScalarProperty Name="TotalRunTime" ColumnName="TotalRunTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -113,22 +153,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProcessedBies">
-      <EntityTypeMapping TypeName="RaptorModel.ProcessedBy">
-        <MappingFragment StoreEntitySet="ProcessedBy">
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="UrlId" ColumnName="UrlId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OnlineHistories">
-      <EntityTypeMapping TypeName="RaptorModel.OnlineHistory">
-        <MappingFragment StoreEntitySet="OnlineHistory">
-          <ScalarProperty Name="SessionTime" ColumnName="SessionTime" />
-          <ScalarProperty Name="OfflineAt" ColumnName="OfflineAt" />
-          <ScalarProperty Name="OnlineAt" ColumnName="OnlineAt" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
+    <EntitySetMapping Name="Faces">
+      <EntityTypeMapping TypeName="RaptorModel.Face">
+        <MappingFragment StoreEntitySet="Faces">
+          <ScalarProperty Name="COId" ColumnName="COId" />
+          <ScalarProperty Name="COFace" ColumnName="COFace" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

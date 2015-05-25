@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RaptorContentObjectsSeeder.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Username" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Dave Gordon</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ABBA566B89891F77C5A9121371A0A15A5B941F6CA9CFF2B19AB396D2A6B2782215E10393439918F86ABA07A870743CE4C97786D9B093C975676C55F4A401E3B4</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

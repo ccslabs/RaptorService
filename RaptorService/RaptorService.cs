@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceModel;
 using System.Text;
 using System.Threading;
@@ -98,7 +100,7 @@ namespace RaptorService
             int StatusValue = Lrdb.GetUserAccountStatus(Name, passwordHash); // This is only relevant for those using the Raptor CO-ARC Manager
             if (Lrdb.ContinueLogin(Name, passwordHash, StatusValue))
             {
-                SendEvent("\tSucess");
+                SendEvent("\tSuccess");
                 return true;
             }
             SendEvent("\tFailed");
@@ -241,6 +243,7 @@ namespace RaptorService
         }
 
         #endregion
+
     }
 
 

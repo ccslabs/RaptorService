@@ -13,10 +13,10 @@ namespace RaptorDb
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RaptorEntities1 : DbContext
+    public partial class RaptorEntities : DbContext
     {
-        public RaptorEntities1()
-            : base("name=RaptorEntities1")
+        public RaptorEntities()
+            : base("name=RaptorEntities")
         {
         }
     
@@ -26,7 +26,12 @@ namespace RaptorDb
         }
     
         public virtual DbSet<ARecord> ARecords { get; set; }
+        public virtual DbSet<ContentObject> ContentObjects { get; set; }
+        public virtual DbSet<COSource> COSources { get; set; }
         public virtual DbSet<CRecord> CRecords { get; set; }
+        public virtual DbSet<Face> Faces { get; set; }
+        public virtual DbSet<OnlineHistory> OnlineHistories { get; set; }
+        public virtual DbSet<ProcessedBy> ProcessedBies { get; set; }
         public virtual DbSet<RankHistory> RankHistories { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<RRecord> RRecords { get; set; }
@@ -35,7 +40,5 @@ namespace RaptorDb
         public virtual DbSet<Url> Urls { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WorkRecord> WorkRecords { get; set; }
-        public virtual DbSet<ProcessedBy> ProcessedBies { get; set; }
-        public virtual DbSet<OnlineHistory> OnlineHistories { get; set; }
     }
 }
