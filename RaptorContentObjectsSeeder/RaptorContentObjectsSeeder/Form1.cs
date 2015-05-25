@@ -19,7 +19,8 @@ namespace RaptorContentObjectsSeeder
 {
     public partial class Form1 : Form
     {
-        private RaptorService.RaptorServiceClient RAPI = new RaptorService.RaptorServiceClient();
+        #region Setup and Globals
+private RaptorService.RaptorServiceClient RAPI = new RaptorService.RaptorServiceClient();
         private NetTcpBinding binding;
         private ChannelFactory<RaptorStreamingHost> factory;
         private RaptorStreamingHost service;
@@ -28,34 +29,20 @@ namespace RaptorContentObjectsSeeder
         private Rectangle Rect = new Rectangle();
         private Brush selectionBrush = new SolidBrush(Color.FromArgb(128, 72, 145, 220));
         PictureBox pbFaces;
+        #endregion
+        
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        Queue<string> ImagesQueue = new Queue<string>();
-        private void btnLoadImage_Click(object sender, EventArgs e)
+        
+        #region Load Images from Disk
+
+        private string LoadFile(string filename)
         {
-            DialogResult dr = OFD.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                Progress.Maximum = OFD.FileNames.Count();
-                foreach (string filename in OFD.FileNames)
-                {
-                    try
-                    {
-                        ImagesQueue.Enqueue(filename);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                }
-                RunQueue();
-                // Now let the user select the faces from the image
-                // Then when the user clicks Save Faces - StreamToService and re-run RunQueue();
-            }
+            return Hashing.BytesToString(File.ReadAllBytes(filename));
         }
 
         private void RunQueue()
@@ -67,6 +54,9 @@ namespace RaptorContentObjectsSeeder
             pbOriginal.MouseUp += PbOriginal_MouseUp;
             Progress.Value = ImagesQueue.Count();
         }
+        #endregion
+
+        #region PictureBox Events
 
         private void PbOriginal_MouseUp(object sender, MouseEventArgs e)
         {
@@ -104,26 +94,9 @@ namespace RaptorContentObjectsSeeder
             Invalidate();
         }
 
-        private void btnSaveFaces_Click(object sender, EventArgs e)
-        {
+        #endregion
 
-        }
-
-        private void StreamContentObjectToService(string filename)
-        {
-            ContentObjectData co = new ContentObjectData();
-            
-
-            co.Data = LoadFile(filename);
-            co.Hash = Hashing.HashString(co.Data);
-            co.DisplayImage = co.Data;
-            co.FileName = co.Hash;
-            Stream stream = SerializeToStream(co);
-            service.SendContentObject(stream);
-
-            //Rerun RunQueue()
-            RunQueue();
-        }
+        #region ContentObject Actions
 
         private bool SendContentObject(Stream stream)
         {
@@ -132,57 +105,25 @@ namespace RaptorContentObjectsSeeder
             return true;
         }
 
-        private string LoadFile(string filename)
+        private void StreamContentObjectToService(string filename)
         {
-            return Hashing.BytesToString(File.ReadAllBytes(filename));
+            ContentObjectData co = new ContentObjectData();
+
+
+            co.Data = LoadFile(filename);
+            co.Hash = Hashing.HashString(co.Data);
+            co.DisplayImage = co.Data;
+            co.FileName = co.Hash;
+            Stream stream = SerializeObjectToStream(co);
+            service.SendContentObject(stream);
+
+            //Rerun RunQueue()
+            RunQueue();
         }
 
+        #endregion
 
-        /// <summary>
-        /// serializes the given object into memory stream
-        /// </summary>
-        /// <param name="objectType">the object to be serialized</param>
-        /// <returns>The serialized object as memory stream</returns>
-        public static Stream SerializeToStream(object objectType)
-        {
-            MemoryStream stream = new MemoryStream();
-            IFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, objectType);
-            stream.Position = 0L; // REMEMBER to reset stream or WCF will just send the stream from the end resulting in an empty stream!
-            return (Stream)stream;
-        }
-
-        public static void CopyStream(Stream input, Stream output)
-        {
-            byte[] buffer = new byte[32768];
-            int read;
-            try
-            {
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    output.Write(buffer, 0, read);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
-
-        public static ContentObjectData DeserializeFromStream(byte[] allBytes)
-        {
-            using (var stream = new MemoryStream(allBytes))
-                return (ContentObjectData)DeserializeFromStream(stream);
-        }
-
-        public static ContentObjectData DeserializeFromStream(MemoryStream stream)
-        {
-            IFormatter formatter = new BinaryFormatter();
-            stream.Seek(0, SeekOrigin.Begin);
-            ContentObjectData objectType = (ContentObjectData)formatter.Deserialize(stream);
-            return objectType;
-        }
+        #region Form Events
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -204,6 +145,39 @@ namespace RaptorContentObjectsSeeder
             ((IClientChannel)service).Close();
         }
 
+        #endregion
+
+        #region Button Events
+
+        private void btnSaveFaces_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        Queue<string> ImagesQueue = new Queue<string>();
+        private void btnLoadImage_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = OFD.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                Progress.Maximum = OFD.FileNames.Count();
+                foreach (string filename in OFD.FileNames)
+                {
+                    try
+                    {
+                        ImagesQueue.Enqueue(filename);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+                RunQueue();
+                // Now let the user select the faces from the image
+                // Then when the user clicks Save Faces - StreamToService and re-run RunQueue();
+            }
+        }
+
         private void btnLoadFromDatabase_Click(object sender, EventArgs e)
         {
             // lets get ten at a time
@@ -217,7 +191,7 @@ namespace RaptorContentObjectsSeeder
                 stream.CopyTo(memStream);
                 byte[] alBytes = memStream.ToArray();
                 stream.Close();
-                ContentObjectData cod = DeserializeFromStream(alBytes);
+                ContentObjectData cod = DeserializeContentObjectFromStream(alBytes);
                 MemoryStream memStream2 = new MemoryStream(Hashing.StringToBytes(cod.DisplayImage));
                 pb.Image = Image.FromStream(memStream2);
                 pb.Size = new Size(100, 100);
@@ -241,8 +215,73 @@ namespace RaptorContentObjectsSeeder
 
         }
 
-       
+        #endregion
+
+        #region Stream Management
+
+      
+
+        private static void CopyStream(Stream input, Stream output)
+        {
+            byte[] buffer = new byte[32768];
+            int read;
+            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                output.Write(buffer, 0, read);
+            }
+        }
+
+        #endregion
+
+        #region Serialize Objects
+
+        private static Stream SerializeObjectToStream(object objectType)
+        {
+            MemoryStream stream = new MemoryStream();
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, objectType);
+            stream.Position = 0L; // REMEMBER to reset stream or WCF will just send the stream from the end resulting in an empty stream!
+            return (Stream)stream;
+        }
+
+        #endregion
+
+        #region DeSerialize Objects
+
+        private static Face.Face DeserializeFaceFromStream(byte[] allBytes)
+        {
+            using (var stream = new MemoryStream(allBytes))
+                return (Face.Face)DeserializeFaceFromStream(stream);
+        }
+
+        private static Face.Face DeserializeFaceFromStream(MemoryStream stream)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            stream.Seek(0, SeekOrigin.Begin);
+            Face.Face objectType = (Face.Face)formatter.Deserialize(stream);
+            return objectType;
+        }
+
+        private static ContentObjectData DeserializeContentObjectFromStream(byte[] allBytes)
+        {
+            using (var stream = new MemoryStream(allBytes))
+                return (ContentObjectData)DeserializeContentObjectFromStream(stream);
+        }
+
+        private static ContentObjectData DeserializeContentObjectFromStream(MemoryStream stream)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            stream.Seek(0, SeekOrigin.Begin);
+            ContentObjectData objectType = (ContentObjectData)formatter.Deserialize(stream);
+            return objectType;
+        }
+
+        #endregion
+
     }
+
+
+    // This is required as we do not have a MEX binding for this Service
 
     [ServiceContract]
     public interface RaptorStreamingHost
@@ -255,6 +294,9 @@ namespace RaptorContentObjectsSeeder
 
         [OperationContract]
         Stream GetSpecificContentObject(int ContentNumber);
+
+        [OperationContract]
+        void SendFaces(Stream data);
     }
 
     internal class Hashing

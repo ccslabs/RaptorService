@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RaptorService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="MyTcpBinding_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://ccs-labs.com:801/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://ccs-labs.com:801/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://ccs-labs.com:801/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RaptorService" />
+      <xsd:import schemaLocation="http://ccs-labs.com:801/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRaptorService_GetLastError_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastError" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_GetLastError_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastErrorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_LogOff_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogOff" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_GetDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDetails" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_GetDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_SendUrls_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendUrls" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_SendUrls_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendUrlsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_SendError_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendError" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_ReceiveUrls_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveUrls" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_RegisterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_RegisterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_CheckEmailAddressIsFree_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckEmailAddressIsFree" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_CheckEmailAddressIsFree_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckEmailAddressIsFreeResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IRaptorService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetLastError">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/GetLastError" message="tns:IRaptorService_GetLastError_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/GetLastErrorResponse" message="tns:IRaptorService_GetLastError_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/Login" message="tns:IRaptorService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/LoginResponse" message="tns:IRaptorService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="true" name="LogOff">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/LogOff" message="tns:IRaptorService_LogOff_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="false" name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/DeleteUser" message="tns:IRaptorService_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/DeleteUserResponse" message="tns:IRaptorService_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="false" name="GetDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/GetDetails" message="tns:IRaptorService_GetDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/GetDetailsResponse" message="tns:IRaptorService_GetDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="false" name="SendUrls">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/SendUrls" message="tns:IRaptorService_SendUrls_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/SendUrlsResponse" message="tns:IRaptorService_SendUrls_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="false" name="SendError">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/SendError" message="tns:IRaptorService_SendError_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="false" name="ReceiveUrls">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/ReceiveUrls" message="tns:IRaptorService_ReceiveUrls_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="false" name="RegisterUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/RegisterUser" message="tns:IRaptorService_RegisterUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/RegisterUserResponse" message="tns:IRaptorService_RegisterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="true" name="CheckEmailAddressIsFree">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/CheckEmailAddressIsFree" message="tns:IRaptorService_CheckEmailAddressIsFree_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/CheckEmailAddressIsFreeResponse" message="tns:IRaptorService_CheckEmailAddressIsFree_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MyTcpBinding" type="tns:IRaptorService">
+    <wsp:PolicyReference URI="#MyTcpBinding_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetLastError">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/GetLastError" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOff">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/LogOff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDetails">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/GetDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUrls">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/SendUrls" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendError">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/SendError" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveUrls">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/ReceiveUrls" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckEmailAddressIsFree">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/CheckEmailAddressIsFree" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RaptorService">
+    <wsdl:port name="MyTcpBinding" binding="tns:MyTcpBinding">
+      <soap12:address location="net.tcp://ccs-labs.com:802/RaptorService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://ccs-labs.com:802/RaptorService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>WebServer9\Dave</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
