@@ -12,3 +12,5 @@ C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorService\
 C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorService\obj\Debug\RaptorService.csprojResolveAssemblyReference.cache
 C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorService\obj\Debug\RaptorService.dll
 C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorService\obj\Debug\RaptorService.pdb
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorService\bin\Debug\Faces.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorService\bin\Debug\Faces.pdb

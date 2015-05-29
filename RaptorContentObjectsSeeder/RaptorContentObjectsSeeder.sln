@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageUtilities", "ImageUtil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentObjects", "ContentObjects\ContentObjects.csproj", "{5622264E-B345-445D-A14B-5F6DF88B00A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceObjects", "Faces\FaceObjects.csproj", "{7AF1F1E5-34CC-4C65-AB22-744CECC37DE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5622264E-B345-445D-A14B-5F6DF88B00A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5622264E-B345-445D-A14B-5F6DF88B00A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5622264E-B345-445D-A14B-5F6DF88B00A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AF1F1E5-34CC-4C65-AB22-744CECC37DE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF1F1E5-34CC-4C65-AB22-744CECC37DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF1F1E5-34CC-4C65-AB22-744CECC37DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF1F1E5-34CC-4C65-AB22-744CECC37DE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

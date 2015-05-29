@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FacesLib;
 
 namespace RaptorDb
 {
@@ -20,6 +21,7 @@ namespace RaptorDb
             try
             {
                 raptorEntities = new RaptorEntities();
+                raptorEntities.Database.Connection.StateChange += Connection_StateChange;
                 raptorEntities.Database.Connection.Open();
             }
             catch (Exception)
@@ -30,6 +32,19 @@ namespace RaptorDb
                 raptorEntities.Database.Connection.Open();
             }
 
+        }
+
+        private void Connection_StateChange(object sender, System.Data.StateChangeEventArgs e)
+        {
+            switch (e.CurrentState)
+            {
+                case System.Data.ConnectionState.Closed:
+                case System.Data.ConnectionState.Broken:
+                    raptorEntities.Database.Connection.Open();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public bool CheckEmailAddressIsFree(string emailAddress)
@@ -45,6 +60,7 @@ namespace RaptorDb
 
         public User GetUserByName(string userName, string password)
         {
+          if(raptorEntities.Database.Connection.State != System.Data.ConnectionState.Open)  raptorEntities.Database.Connection.Open();
             return raptorEntities.Users.SingleOrDefault(r => r.UserFullName == userName && r.UserPassword == password); //returns a single item.
         }
 
@@ -69,6 +85,7 @@ namespace RaptorDb
 
         }
 
+       
         public bool RegisterUser(string name, string country, string emailAddress, string passwordHash)
         {
             using (var rapEn = new RaptorEntities())
@@ -106,6 +123,12 @@ namespace RaptorDb
             }
         }
 
+        public long GetContentObjectId(string coHash)
+        {            
+            var res = raptorEntities.ContentObjects.FirstOrDefault(cid => cid.COHash == coHash);
+            return res.Id;
+        }
+
         public bool DeleteUser()
         {
             var UserToDelete = user;
@@ -128,7 +151,11 @@ namespace RaptorDb
             // Get a Url which has not been processed
             // which is not a Content Object (They are processed in the Raptor Manager)
             // Which has not a faulted Error Code - may need to change this later! redirection responses may be ok.
-            var res = raptorEntities.Urls.OrderBy(u => u.Id).Where(w => w.Processed == false && w.IsContentObject == false && w.ResponseCode == 0).Take(numberOfUrlsToIncreaseQueueBy);
+            
+            var res = raptorEntities.Urls.OrderBy(u => u.Id).Where(w => w.Processed == false && 
+            w.IsContentObject == false && 
+            w.ResponseCode == 0 &&
+            w.URLPath.StartsWith("http")).Take(numberOfUrlsToIncreaseQueueBy);            
             return res;
         }
 
@@ -201,13 +228,15 @@ namespace RaptorDb
             raptorEntities.Database.Connection.Open();
             try
             {
-                OriginalUrlId = raptorEntities.Urls.First(u => u.URLPath == currentUrl);                   // Get the Id of the Current URL
+                OriginalUrlId = raptorEntities.Urls.FirstOrDefault(u => u.URLPath == currentUrl);                   // Get the Id of the Current URL
                 // If this has already been added then we will get a result which we can ignore - or it will throw an exception which we catch and process as a new record.
                 DuplicateEntry = raptorEntities.ProcessedBies.First(p => p.UrlId == OriginalUrlId.Id && p.UserId == user.Id);
             }
             catch (Exception)
             {
-                if (DuplicateEntry == null)
+                try
+                {
+if (DuplicateEntry == null)
                 {
                     // So this is a new record then :P
                     DuplicateEntry = new ProcessedBy();
@@ -216,6 +245,12 @@ namespace RaptorDb
                     raptorEntities.ProcessedBies.Add(DuplicateEntry);
                     raptorEntities.SaveChanges();
                 }
+                }
+                catch (Exception)
+                {
+
+                }
+                
             }
             finally
             {
@@ -298,7 +333,7 @@ namespace RaptorDb
                 { // Just ignore this it is a duplicate record.
                 }
                 else
-                    throw ex;
+                    throw ;
             }
             finally
             {

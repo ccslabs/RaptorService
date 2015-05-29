@@ -88,6 +88,12 @@
   <wsdl:message name="IRaptorService_CheckEmailAddressIsFree_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckEmailAddressIsFreeResponse" />
   </wsdl:message>
+  <wsdl:message name="IRaptorService_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IRaptorService_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IRaptorService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetLastError">
       <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/GetLastError" message="tns:IRaptorService_GetLastError_InputMessage" />
@@ -125,6 +131,10 @@
     <wsdl:operation msc:isInitiating="false" msc:isTerminating="true" name="CheckEmailAddressIsFree">
       <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/CheckEmailAddressIsFree" message="tns:IRaptorService_CheckEmailAddressIsFree_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/CheckEmailAddressIsFreeResponse" message="tns:IRaptorService_CheckEmailAddressIsFree_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="false" msc:isTerminating="false" name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRaptorService/Ping" message="tns:IRaptorService_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRaptorService/PingResponse" message="tns:IRaptorService_Ping_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MyTcpBinding" type="tns:IRaptorService">
@@ -204,6 +214,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckEmailAddressIsFree">
       <soap12:operation soapAction="http://tempuri.org/IRaptorService/CheckEmailAddressIsFree" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IRaptorService/Ping" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

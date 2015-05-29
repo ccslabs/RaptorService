@@ -11,7 +11,8 @@ namespace RaptorDb
 {
     using System;
     using System.Collections.Generic;
-    
+    using FacesLib;
+
     public partial class Face
     {
         public long Id { get; set; }
@@ -19,5 +20,7 @@ namespace RaptorDb
         public long COId { get; set; }
     
         public virtual ContentObject ContentObject { get; set; }
+
+        
     }
 }

@@ -11,7 +11,8 @@ namespace RaptorDb
 {
     using System;
     using System.Collections.Generic;
-    
+    using ContentObjects;
+
     public partial class ContentObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,5 +32,10 @@ namespace RaptorDb
         public virtual ICollection<COSource> COSources { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Face> Faces { get; set; }
+
+        public static explicit operator ContentObjectData(ContentObject v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

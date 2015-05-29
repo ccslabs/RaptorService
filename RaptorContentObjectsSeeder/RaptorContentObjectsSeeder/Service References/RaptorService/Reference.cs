@@ -297,6 +297,12 @@ namespace RaptorContentObjectsSeeder.RaptorService {
         
         [System.ServiceModel.OperationContractAttribute(IsTerminating=true, IsInitiating=false, Action="http://tempuri.org/IRaptorService/CheckEmailAddressIsFree", ReplyAction="http://tempuri.org/IRaptorService/CheckEmailAddressIsFreeResponse")]
         System.Threading.Tasks.Task<bool> CheckEmailAddressIsFreeAsync(string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/IRaptorService/Ping", ReplyAction="http://tempuri.org/IRaptorService/PingResponse")]
+        bool Ping();
+        
+        [System.ServiceModel.OperationContractAttribute(IsInitiating=false, Action="http://tempuri.org/IRaptorService/Ping", ReplyAction="http://tempuri.org/IRaptorService/PingResponse")]
+        System.Threading.Tasks.Task<bool> PingAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -404,6 +410,14 @@ namespace RaptorContentObjectsSeeder.RaptorService {
         
         public System.Threading.Tasks.Task<bool> CheckEmailAddressIsFreeAsync(string emailAddress) {
             return base.Channel.CheckEmailAddressIsFreeAsync(emailAddress);
+        }
+        
+        public bool Ping() {
+            return base.Channel.Ping();
+        }
+        
+        public System.Threading.Tasks.Task<bool> PingAsync() {
+            return base.Channel.PingAsync();
         }
     }
 }

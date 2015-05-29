@@ -37,31 +37,40 @@ namespace RaptorStreamingHost
         [OperationContract]
         public void SendFaces(Stream data)
         {
-            Console.WriteLine("Client Sending Faces");
             var memoryStream = new MemoryStream();
             using (data)
                 CopyStream(data, memoryStream);
             byte[] alBytes = memoryStream.ToArray();
             data.Close();
-            Face.Face fac = DeserializeFaceFromStream(alBytes);
+            FacesLib.FacesObject fac = DeserializeFaceFromStream(alBytes);
+            if (RAPI.SaveFaces((RaptorDb.Face)fac))
+                Console.WriteLine("Saved Face");
+            else
+                Console.WriteLine("Failed to Save Face");
+
         }
 
         [OperationContract]
-        public void SendContentObject(Stream data)
+        public bool SendContentObject(Stream data)
         {
-            Console.WriteLine("Client Sending Content Object");
             var memoryStream = new MemoryStream();
             using (data)
                 CopyStream(data, memoryStream);
             byte[] alBytes = memoryStream.ToArray();
             data.Close();
             ContentObjectData cod = DeserializeContentObjectFromStream(alBytes);
-            
+
             bool res = RAPI.SaveContentObject((RaptorDb.ContentObject)cod);
             if (res)
+            {
                 Console.WriteLine("Saved Content Object");
+                return true;
+            }
             else
+            {
                 Console.WriteLine("Failed to Save Content Object");
+                return false;
+            }
         }
 
         [OperationContract]
@@ -72,21 +81,28 @@ namespace RaptorStreamingHost
             stream.Position = 0L;
             return stream;
         }
+
+        [OperationContract]
+        public long GetContentObjectId(string coHash)
+        {
+            return RAPI.GetContentObjectId(coHash);
+        }
+
         #endregion
 
         #region Deserialization
 
-        private static Face.Face DeserializeFaceFromStream(byte[] allBytes)
+        private static FacesLib.FacesObject DeserializeFaceFromStream(byte[] allBytes)
         {
             using (var stream = new MemoryStream(allBytes))
-                return (Face.Face)DeserializeFaceFromStream(stream);
+                return (FacesLib.FacesObject)DeserializeFaceFromStream(stream);
         }
 
-        private static Face.Face DeserializeFaceFromStream(MemoryStream stream)
+        private static FacesLib.FacesObject DeserializeFaceFromStream(MemoryStream stream)
         {
             IFormatter formatter = new BinaryFormatter();
             stream.Seek(0, SeekOrigin.Begin);
-            Face.Face objectType = (Face.Face)formatter.Deserialize(stream);
+            FacesLib.FacesObject objectType = (FacesLib.FacesObject)formatter.Deserialize(stream);
             return objectType;
         }
 
@@ -132,7 +148,7 @@ namespace RaptorStreamingHost
 
         #endregion
 
-        
+
     }
 
 

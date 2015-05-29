@@ -55,6 +55,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="XPicbox">
+      <HintPath>..\..\..\..\..\Dependencies\Controls\XPicbox.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -119,6 +122,10 @@
     <ProjectReference Include="..\ContentObjects\ContentObjects.csproj">
       <Project>{5622264e-b345-445d-a14b-5f6df88b00a3}</Project>
       <Name>ContentObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Faces\FaceObjects.csproj">
+      <Project>{7af1f1e5-34cc-4c65-ab22-744cecc37de4}</Project>
+      <Name>FaceObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

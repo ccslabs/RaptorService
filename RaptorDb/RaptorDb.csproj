@@ -41,6 +41,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Faces">
+      <HintPath>..\RaptorContentObjectsSeeder\Faces\bin\Debug\Faces.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -70,6 +73,7 @@
     <Compile Include="Face.cs">
       <DependentUpon>RaptorEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="FacesPartial.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="OnlineHistory.cs">
       <DependentUpon>RaptorEntities.tt</DependentUpon>

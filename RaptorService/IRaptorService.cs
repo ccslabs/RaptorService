@@ -44,6 +44,8 @@ namespace RaptorService
         [OperationContract(IsInitiating = false, IsTerminating = true)]
         bool CheckEmailAddressIsFree(string emailAddress);
 
+        [OperationContract(IsInitiating = false, IsTerminating = false)]
+        bool Ping();
        
     }
 

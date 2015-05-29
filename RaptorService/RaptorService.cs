@@ -22,7 +22,7 @@ namespace RaptorService
     }
 
 
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Single,AutomaticSessionShutdown = true)]
     public class RaptorService : IRaptorService
     {
         public static event EventHandler<CustomEventArgs> CustomEvent;
@@ -48,6 +48,7 @@ namespace RaptorService
             OperationContext.Current.InstanceContext.Closing += InstanceContext_Closing; // Required to log the Agent off.          
         }
 
+        //TODO: This would be a good callback function area to tell the client to reconnect !!
         private void InstanceContext_Closing(object sender, EventArgs e)
         {
             SendEvent("RaptorService Client Connection Closing");
@@ -57,14 +58,12 @@ namespace RaptorService
 
         public string LastError { get; set; }
 
-        private static Queue<string> UrlQueue = new Queue<string>();
+        private  Queue<string> UrlQueue = new Queue<string>();
         private RaptorDb.Methods rdb = new RaptorDb.Methods();
 
         public string GetLastError()
         {
-            if (LastMessage != "Client GetLastError()")
-                Console.WriteLine("Client GetLastError()");
-            LastMessage = "Client GetLastError()";
+            SendEvent("Client GetLastError");
             return LastError;
         }
 
@@ -158,6 +157,11 @@ namespace RaptorService
 
         #region Utilities
 
+        public bool Ping()
+        {
+            return true;
+        }
+
         private User GetUserByUsernameAndPassword(string userName, string Password)
         {
             SendEvent("RaptorService is Getting User By Username and Password");
@@ -186,7 +190,7 @@ namespace RaptorService
             catch (Exception ex)
             {
 
-                throw ex;
+                throw ;
             }
 
         }
@@ -194,7 +198,7 @@ namespace RaptorService
         #endregion
 
         #region Receive Urls from Client
-        private static double UrlCount = 0;
+        private  double UrlCount = 0;
         private Queue<ReceivedURLCollection> rucQueue = new Queue<ReceivedURLCollection>();
 
 
@@ -241,6 +245,8 @@ namespace RaptorService
             serdb.ReciveErrorUrl(uE.CurrentUrl, uE.ErrorCode);
             serdb = null;
         }
+
+       
 
         #endregion
 

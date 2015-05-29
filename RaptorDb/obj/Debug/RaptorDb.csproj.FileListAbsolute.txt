@@ -10,3 +10,5 @@ C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\D
 C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\obj\Debug\RaptorDb.dll
 C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\obj\Debug\RaptorDb.pdb
 C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\obj\Debug\RaptorDb.csprojResolveAssemblyReference.cache
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\Faces.dll
+C:\Users\Dave\documents\visual studio 2015\Projects\RaptorService\RaptorDb\bin\Debug\Faces.pdb

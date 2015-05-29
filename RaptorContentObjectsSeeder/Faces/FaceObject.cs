@@ -5,22 +5,18 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace ContentObjects
+namespace FacesLib
 {
     [Serializable]
     [DataContract]
-    public class ContentObjectData
+    public partial class FacesObject
     {
         [DataMember]
-        public string Hash { get; set; }
+        public long Id { get; set; }
         [DataMember]
-        public string Data { get; set; }
+        public string COFace { get; set; }
         [DataMember]
-        public string FileName { get; set; }
-        [DataMember]
-        public string DisplayImage { get; set; }
+        public long COId { get; set; }
     }
 }
-
 
